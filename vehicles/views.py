@@ -8,10 +8,12 @@ class BusList(ListCreateAPIView):
     serializer_class = VehicleSerializer
 
 
-#class BusDetail(RetrieveUpdateDestroyAPIView):
-    queryset = Vehicle.objects.all()
+class BusDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = VehicleSerializer
 
+    def get_object(self):
+        vehicle = Vehicle.objects.get(pk=self.kwargs['pk'])
+        return vehicle
 
 
 

@@ -15,3 +15,12 @@ class Vehicle(DateModelMixin):
         ordering = ('-created_at', )
 
 
+class VehicleStat(DateModelMixin):
+    vehicle = models.ForeignKey('vehicles.Vehicle', on_delete=models.CASCADE)
+    data = models.JSONField(default=dict)
+
+    def __str__(self):
+        return self.vehicle.unique_number
+
+    class Meta:
+        ordering = ('-created_at', )

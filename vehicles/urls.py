@@ -3,5 +3,5 @@ from vehicles.views import BusList, BusDetail
 
 urlpatterns = [
     path('', BusList.as_view(), name='bus-list'),
-    path('add/', ),
+    path('add/', BusDetail.as_view(), name='bus-detail'),
 ]
