@@ -7,13 +7,34 @@ class BusList(ListCreateAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
 
 class BusDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
-    def get_object(self):
-        vehicle = Vehicle.objects.get(pk=self.kwargs['pk'])
-        return vehicle
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+#class BusDelete(RetrieveUpdateDestroyAPIView):
+    #queryset = Vehicle.objects.all()
+    #serializer_class = VehicleSerializer
+
+    #def delete(self, request, *args, **kwargs):
+        #return self.destroy(request, *args, **kwargs)
+
 
 
 
