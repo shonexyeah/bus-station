@@ -1,12 +1,15 @@
 from routes.models import Route
 from routes.serializers import RouteSerialzer
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-
+from routes.filters import RouteFilter
 
 # Create your views here.
 class RouteList(ListCreateAPIView):
     queryset = Route.objects.all()
     serializer_class = RouteSerialzer
+    filterset_class = RouteFilter
+
+    search_fields = ('unit_id', 'finish_line')
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)

@@ -34,6 +34,3 @@ class DestinationDetail(RetrieveUpdateDestroyAPIView):
         return self.destroy(request, *args, **kwargs)
 
 
-from django.shortcuts import render
-
-# Create your views here.
