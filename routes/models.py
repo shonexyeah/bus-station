@@ -9,7 +9,7 @@ class Route(DateModelMixin):
     finish_line = models.ForeignKey('destinations.Destination', on_delete=models.PROTECT) #treba povezati sa destinations/destination
 
     # time info
-    created_at = models.DateTimeField(auto_now_add=True)
+    # created_at = models.DateTimeField(auto_now_add=True)
     finished_at = models.DateTimeField(auto_now=True)
 
     # vehicle info

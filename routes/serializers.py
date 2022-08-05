@@ -2,7 +2,7 @@ from rest_framework import serializers
 from routes.models import Route
 
 
-class RouteSerialzer(serializers.ModelSerializer):
+class RouteSerialzer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Route

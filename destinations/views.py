@@ -25,11 +25,6 @@ class DestinationDetail(RetrieveUpdateDestroyAPIView):
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
-    #def get_object(self):
-        #destination = Destination.objects.get(pk=self.kwargs['pk'])
-        #return destination
-
-
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
