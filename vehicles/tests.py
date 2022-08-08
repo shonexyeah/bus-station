@@ -11,7 +11,7 @@ class CreationVehicleTest(APITestCase):
         self.data = {"unique_number": "22", "licence_plate": "BC007NX", "seating_capacity": "12"}
 
     def test_create(self):
-        response = self.client.post(reverse('vehicle-list'), self.data)
+        response = self.client.post(reverse('vehicle-list-create'), self.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         response_data = response.json()
@@ -28,7 +28,7 @@ class ReadVehicleTest(APITestCase):
 
 
     def test_vehicle_read(self):
-        response = self.client.get(reverse('vehicle-list'))
+        response = self.client.get(reverse('vehicle-list-create'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_data = response.json()
         print(response_data)

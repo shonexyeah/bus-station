@@ -21,7 +21,7 @@ class CreationDestinationTest(APITestCase):
         self.data = {"address_street": "11.Novembra 68", "address_city": "Becej", "address_zip": "21220", "name": "BC"}
 
     def test_create(self):
-        response = self.client.post(reverse('destination-list'), self.data)
+        response = self.client.post(reverse('destination-list-create'), self.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         response_data = response.json()
@@ -42,7 +42,7 @@ class ReadDestinationTest(APITestCase):
 
 
     def test_destination_read(self):
-        response = self.client.get(reverse('destination-list'))
+        response = self.client.get(reverse('destination-list-create'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_data = response.json()
         print(response_data)
