@@ -2,6 +2,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from vehicles.models import Vehicle
 from django.urls import reverse
+from vehicles.serializers import VehicleSerializerPost
 
 
 class CreationVehicleTest(APITestCase):
@@ -39,6 +40,26 @@ class ReadVehicleTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
+class UpdateVehicleTest(APITestCase):
+    def setUp(self):
+        self.vehicle = Vehicle.objects.create(unique_number="33", licence_plate="BC009NX", seating_capacity="200")
+        self.data = VehicleSerializerPost(self.vehicle).data
+        self.data.update({'licence_plate': 'LO053ER'})
+
+    def test_update_vehicle(self):
+        response = self.client.put(reverse('vehicle-detail', args=[self.vehicle.id]), self.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = response.json()
+        print(response_data)
+
+
+class DeleteVehicleTest(APITestCase):
+    def setUp(self):
+        self.vehicle = Vehicle.objects.create(unique_number="33", licence_plate="BC009NX", seating_capacity="200")
+
+    def test_delete_vehicle(self):
+        response = self.client.delete(reverse('vehicle-detail', args=[self.vehicle.id]))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
 
 

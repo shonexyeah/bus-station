@@ -2,6 +2,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from destinations.models import Destination
 from django.urls import reverse
+from destinations.serializers import DestinationSerializerPost
 
 # Create your tests here.
 class CreationTest(APITestCase):
@@ -51,3 +52,29 @@ class ReadDestinationTest(APITestCase):
     def test_read_destination_detail(self):
         response = self.client.get(reverse('destination-detail', args=[self.destination.id]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class UpdateDestinationTest(APITestCase):
+
+    def setUp(self):
+        self.destination = Destination.objects.create(address_street="11.Novembra 68", address_city="Becej",
+                                                      address_zip="21220", name="BC")
+        self.data = DestinationSerializerPost(self.destination).data
+        self.data.update({'address_city': 'CEJBE'})
+
+    def test_update_destination(self):
+        response = self.client.put(reverse('destination-detail', args=[self.destination.id]), self.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = response.json()
+        print(response_data)
+
+
+class DeleteDestinationTest(APITestCase):
+
+    def setUp(self):
+        self.destination = Destination.objects.create(address_street='11.Novembra 68', address_city='Becej',
+                                                      address_zip='21220', name='BC')
+
+    def test_delete_destination(self):
+        response = self.client.delete(reverse('destination-detail', args=[self.destination.id]))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
