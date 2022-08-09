@@ -26,4 +26,8 @@ class RouteDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = RouteSerializer
 
 
+    def get_serializer_class(self):
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            return RouteSerializerPost
 
+        return RouteSerializer

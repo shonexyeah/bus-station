@@ -74,13 +74,16 @@ class UpdateRouteTest(APITestCase):
                      "seating_capacity": "20", "unique_number": self.vehicle.id}
 
         self.data = RouteSerializerPost(self.route).data
-        self.data.update({'seating_capacity': '50'})
+        self.data.update({"seating_capacity": "50"})
+        print(self.data)
 
     def test_update_route(self):
         response = self.client.put(reverse('route-detail', args=[self.route.id]), self.data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
         response_data = response.json()
         print(response_data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
 
 
 class DeleteRouteTest(APITestCase):
