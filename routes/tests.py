@@ -8,8 +8,7 @@ from vehicles.models import Vehicle
 from routes.models import Route
 
 from routes.serializers import RouteSerializerPost
-from vehicles.serializers import VehicleSerializerPost
-from destinations.serializers import DestinationSerializerPost
+
 
 
 # Create your tests here.
