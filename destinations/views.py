@@ -27,5 +27,11 @@ class DestinationDetail(RetrieveUpdateDestroyAPIView):
     queryset = Destination.objects.all()
     serializer_class = DestinationSerializer
 
+    def get_serializer_class(self):
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            return DestinationSerializerPost
+
+        return DestinationSerializer
+
 
 
